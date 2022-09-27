@@ -1,5 +1,7 @@
 'use strict';
 
+//******* class folow along */
+
 console.log('oh hello there');
 
 /// GLOBAL VARIABLES
@@ -10,13 +12,110 @@ let productArray = [];
 let imgContainer = document.getElementById('img-container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
+let imgThree = document.getElementById('img-three');
 
-// CONSTRUCTOR FUNCTION
+let resultsBtn = document.getElementById('results-button');
+let resultsContainer = document.getElementById('results-container');
 
+// CONSTRUCTOR FUNCTION ODD PRODUCTS
+
+function OddProducts(name, fileExtention = 'jpg') {
+  this.name = name;
+  this.img = `img/${name}.${fileExtention}`;
+  this.views = 0;
+  this.clicks = 0;
+
+  productArray.push(this);
+}
 
 // HELPER FUNCTION / UTILITIES
+function randomProduct() {
+  return Math.floor(Math.random() * productArray.length);
+}
 
+function renderImg() {
+  let imgOneIndex = randomProduct();
+  let imgTwoIndex = randomProduct();
+  let imgThreeIndex = randomProduct();
+
+  while(imgOneIndex === imgTwoIndex || imgTwoIndex === imgThreeIndex){
+    imgTwoIndex = randomProduct();
+  }
+
+  while (imgThreeIndex === imgOneIndex || imgThreeIndex === imgTwo){
+    imgThreeIndex = randomProduct();
+  }
+
+  imgOne.src = productArray[imgOneIndex].img;
+  imgTwo.src = productArray[imgTwoIndex].img;
+  imgThree.src = productArray[imgThreeIndex].img;
+
+  productArray[imgOneIndex].views++;
+  productArray[imgTwoIndex].views++;
+  productArray[imgThreeIndex].views++;
+
+  imgOne.alt = productArray[imgOneIndex].name;
+  imgTwo.alt = productArray[imgTwoIndex].name;
+  imgThree.alt = productArray[imgThreeIndex].name;
+}
 
 // EVENT HANDLERS
 
+function handleClick(event){
+  console.dir(event.target);
+  let imgClicked = event.target.alt;
+
+  console.log('img clicked >>', imgClicked);
+
+  for(let i =0; i< productArray.length; i++){
+    if(productArray[i].name === imgClicked){
+      productArray[i].clicks++;
+    }
+  }
+  voteTotal--;
+
+  renderImg();
+
+  if(voteTotal === 0){
+    imgContainer.removeEventListener('click', handleClick);
+  }
+}
+
+function handleShowResults(){
+  if(voteTotal === 0){
+    for (let i =0; i < productArray.length; i++){
+      let liElm = document.createElement('li');
+      liElm.textContent = `${productArray[i].name} was viewed: ${productArray[i].views} and clicked: ${productArray[i].clicks}`;
+      resultsContainer.appendChild(liElm);
+    }
+    resultsBtn.removeEventListener('click', handleShowResults);
+  }
+}
+
+
 //EXCUTABLE CODE
+// ! OBJ CREATION
+new OddProducts('bag');
+new OddProducts('banana');
+new OddProducts('bathroom');
+new OddProducts('boots');
+new OddProducts('breakfast');
+new OddProducts('bubblegum');
+new OddProducts('chair');
+new OddProducts('cthulhu');
+new OddProducts('dog-duck');
+new OddProducts('dragon');
+new OddProducts('pen');
+new OddProducts('pet-sweep');
+new OddProducts('scissors');
+new OddProducts('shark');
+new OddProducts('sweep', 'png');
+new OddProducts('tauntaun');
+new OddProducts('unicorn');
+new OddProducts('water-can');
+new OddProducts('wine-glass');
+
+renderImg();
+
+imgContainer.addEventListener('click', handleClick);
+resultsBtn.addEventListener('click', handleShowResults);
