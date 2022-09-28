@@ -42,7 +42,7 @@ main {
     border-width: 4px;
   }
   
-  #show-results-btn {
+  /* #show-results-btn {
     width: max-content;
     font-family: 'Exo 2', sans-serif;
     padding: 10px;
@@ -96,7 +96,7 @@ main {
     left: 0;
     top: 0;
     border-radius: 10px;
-  }
+  } */
   
   footer {
     height: 100px;
