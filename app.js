@@ -49,9 +49,9 @@ function renderImg() {
   // while (imgThreeIndex === imgOneIndex || imgThreeIndex === imgTwo) {
   //   imgThreeIndex = randomProduct();
   // }
-  while(productArray.length < 3){
+  while (productArray.length < 6) {
     let randomIndex = randomIndex();
-    if(!productArray.includes(randomIndex)){
+    if (!productArray.includes(randomIndex)) {
       productArray.push(randomIndex);
     }
   }
@@ -77,9 +77,9 @@ function renderChart() {
   let productViews = [];
 
   for (let i = 0; i < productArray.length; i++) {
-    productName.push(productArray[i]).name;
-    voteCount.push(productArray[i]).clicks;
-    productViews.push(productArray[i]).views;
+    productName.push(productArray[i].name);
+    voteCount.push(productArray[i].clicks);
+    productViews.push(productArray[i].views);
   }
 
   let myChartObj = {
@@ -90,23 +90,15 @@ function renderChart() {
         {
           data: voteCount,
           label: '# of Votes',
-          backgroundColor: [
-            'green'
-          ],
-          borderColor: [
-            'green'
-          ],
+          backgroundColor: ['green'],
+          borderColor: ['green'],
           borderWidth: 1,
         },
         {
           data: productViews,
           label: '# of Views',
-          backgroundColor: [
-            'blue'
-          ],
-          borderColor: [
-            'blue',
-          ],
+          backgroundColor: ['blue'],
+          borderColor: ['blue'],
           borderWidth: 1,
         },
       ],
@@ -126,10 +118,8 @@ function renderChart() {
 // EVENT HANDLERS
 
 function handleClick(event) {
-  console.dir(event.target);
+  // console.dir(event.target);
   let imgClicked = event.target.alt;
-
-  console.log('img clicked >>', imgClicked);
 
   for (let i = 0; i < productArray.length; i++) {
     if (productArray[i].name === imgClicked) {
@@ -143,20 +133,19 @@ function handleClick(event) {
   if (voteTotal === 0) {
     imgContainer.removeEventListener('click', handleClick);
     renderChart();
-    resultsBtn.removeEventListener('click', handleShowResults);
   }
 }
 
-// function handleShowResults() {
-//   if (voteTotal === 0) {
-//     // for (let i = 0; i < productArray.length; i++) {
-//     //   let liElm = document.createElement('li');
-//     //   liElm.textContent = `${productArray[i].name} was viewed: ${productArray[i].views} and clicked: ${productArray[i].clicks}`;
-//     //   resultsContainer.appendChild(liElm);
-//     // }
-//     resultsBtn.removeEventListener('click', handleShowResults);
-//   }
-// }
+function handleShowResults() {
+  if (voteTotal === 0) {
+    //     // for (let i = 0; i < productArray.length; i++) {
+    //     //   let liElm = document.createElement('li');
+    //     //   liElm.textContent = `${productArray[i].name} was viewed: ${productArray[i].views} and clicked: ${productArray[i].clicks}`;
+    //     //   resultsContainer.appendChild(liElm);
+    //     // }
+    resultsBtn.removeEventListener('click', handleShowResults);
+  }
+}
 
 //EXCUTABLE CODE
 // ! OBJ CREATION
