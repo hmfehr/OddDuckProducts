@@ -2,26 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odd Duck Products</title>
-  <link rel="stylesheey" href="css/reset.css">
+  <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <h1>The Oddest of Odd Products</h1>
+
   <main>
+  <h1>The Oddest of Odd Products</h1>
     
     <section id="img-container">
       <img id="img-one" src="" alt="">
       <img id="img-two" src="" alt="">
       <img id="img-three" src="" alt="">
     </section>
-    <div id="results-button"View Results></div>
-      <ul id="results-container"></ul>
+    <div id="showresultsbtn">View Results></div>
+      <section id="results-container">
+        <canvas id="myChart"></canvas>
   </main>
   <footer>&copy; 2022 Code Fellows</footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
