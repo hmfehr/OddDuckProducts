@@ -49,9 +49,9 @@ function renderImg() {
   // while (imgThreeIndex === imgOneIndex || imgThreeIndex === imgTwo) {
   //   imgThreeIndex = randomProduct();
   // }
-  while(productArray.length < 3){
+  while (productArray.length < 6) {
     let randomIndex = randomIndex();
-    if(!productArray.includes(randomIndex)){
+    if (!productArray.includes(randomIndex)) {
       productArray.push(randomIndex);
     }
   }
@@ -90,23 +90,15 @@ function renderChart() {
         {
           data: voteCount,
           label: '# of Votes',
-          backgroundColor: [
-            'green'
-          ],
-          borderColor: [
-            'green'
-          ],
+          backgroundColor: ['green'],
+          borderColor: ['green'],
           borderWidth: 1,
         },
         {
           data: productViews,
           label: '# of Views',
-          backgroundColor: [
-            'blue'
-          ],
-          borderColor: [
-            'blue',
-          ],
+          backgroundColor: ['blue'],
+          borderColor: ['blue'],
           borderWidth: 1,
         },
       ],
@@ -146,17 +138,30 @@ function handleClick(event) {
     resultsBtn.removeEventListener('click', handleShowResults);
   }
 }
+//local storage
 
-// function handleShowResults() {
-//   if (voteTotal === 0) {
-//     // for (let i = 0; i < productArray.length; i++) {
-//     //   let liElm = document.createElement('li');
-//     //   liElm.textContent = `${productArray[i].name} was viewed: ${productArray[i].views} and clicked: ${productArray[i].clicks}`;
-//     //   resultsContainer.appendChild(liElm);
-//     // }
-//     resultsBtn.removeEventListener('click', handleShowResults);
-//   }
-// }
+let stringifiedProducts = JSON.stringify(productArray);
+
+console.log('stringifiedProducts>>>', stringifiedProducts);
+
+localStorage.setItem('myProduct', stringifiedProducts);
+
+function handleShowResults() {
+  if (voteTotal === 0) {
+    //     // for (let i = 0; i < productArray.length; i++) {
+    //     //   let liElm = document.createElement('li');
+    //     //   liElm.textContent = `${productArray[i].name} was viewed: ${productArray[i].views} and clicked: ${productArray[i].clicks}`;
+    //     //   resultsContainer.appendChild(liElm);
+    //     // }
+    resultsBtn.removeEventListener('click', handleShowResults);
+  }
+}
+
+let retrivedProduct = localStorage.getItem('myProduct');
+console.log('retrievedProduct>>>', retrivedProduct);
+
+let parsedProduct = JSON.parse(retrivedProduct);
+console.log('parsed Product>>>', parsedProduct);
 
 //EXCUTABLE CODE
 // ! OBJ CREATION
