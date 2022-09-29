@@ -77,9 +77,9 @@ function renderChart() {
   let productViews = [];
 
   for (let i = 0; i < productArray.length; i++) {
-    productName.push(productArray[i]).name;
-    voteCount.push(productArray[i]).clicks;
-    productViews.push(productArray[i]).views;
+    productName.push(productArray[i].name);
+    voteCount.push(productArray[i].clicks);
+    productViews.push(productArray[i].views);
   }
 
   let myChartObj = {
@@ -118,10 +118,8 @@ function renderChart() {
 // EVENT HANDLERS
 
 function handleClick(event) {
-  console.dir(event.target);
+  // console.dir(event.target);
   let imgClicked = event.target.alt;
-
-  console.log('img clicked >>', imgClicked);
 
   for (let i = 0; i < productArray.length; i++) {
     if (productArray[i].name === imgClicked) {
@@ -135,16 +133,18 @@ function handleClick(event) {
   if (voteTotal === 0) {
     imgContainer.removeEventListener('click', handleClick);
     renderChart();
-    resultsBtn.removeEventListener('click', handleShowResults);
   }
 }
 //local storage
+
 
 let stringifiedProducts = JSON.stringify(productArray);
 
 console.log('stringifiedProducts>>>', stringifiedProducts);
 
 localStorage.setItem('myProduct', stringifiedProducts);
+
+
 
 function handleShowResults() {
   if (voteTotal === 0) {
@@ -157,11 +157,13 @@ function handleShowResults() {
   }
 }
 
+
 let retrivedProduct = localStorage.getItem('myProduct');
 console.log('retrievedProduct>>>', retrivedProduct);
 
 let parsedProduct = JSON.parse(retrivedProduct);
 console.log('parsed Product>>>', parsedProduct);
+
 
 //EXCUTABLE CODE
 // ! OBJ CREATION
