@@ -135,6 +135,16 @@ function handleClick(event) {
     renderChart();
   }
 }
+//local storage
+
+
+let stringifiedProducts = JSON.stringify(productArray);
+
+console.log('stringifiedProducts>>>', stringifiedProducts);
+
+localStorage.setItem('myProduct', stringifiedProducts);
+
+
 
 function handleShowResults() {
   if (voteTotal === 0) {
@@ -146,6 +156,14 @@ function handleShowResults() {
     resultsBtn.removeEventListener('click', handleShowResults);
   }
 }
+
+
+let retrivedProduct = localStorage.getItem('myProduct');
+console.log('retrievedProduct>>>', retrivedProduct);
+
+let parsedProduct = JSON.parse(retrivedProduct);
+console.log('parsed Product>>>', parsedProduct);
+
 
 //EXCUTABLE CODE
 // ! OBJ CREATION
